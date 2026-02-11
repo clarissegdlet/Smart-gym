@@ -1,0 +1,43 @@
+{
+  "annotations": {
+    "changelogDate": "20260211114820"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "firstName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    }
+  ],
+  "name": "Member",
+  "relationships": [
+    {
+      "otherEntityName": "stravaAccount",
+      "otherEntityRelationshipName": "member",
+      "relationshipName": "stravaAccount",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "booking",
+      "otherEntityRelationshipName": "member",
+      "relationshipName": "booking",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

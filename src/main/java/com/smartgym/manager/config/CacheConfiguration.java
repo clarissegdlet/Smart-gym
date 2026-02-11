@@ -50,6 +50,14 @@ public class CacheConfiguration {
             createCache(cm, com.smartgym.manager.domain.User.class.getName());
             createCache(cm, com.smartgym.manager.domain.Authority.class.getName());
             createCache(cm, com.smartgym.manager.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.smartgym.manager.domain.Member.class.getName());
+            createCache(cm, com.smartgym.manager.domain.Member.class.getName() + ".bookings");
+            createCache(cm, com.smartgym.manager.domain.ClassSession.class.getName());
+            createCache(cm, com.smartgym.manager.domain.ClassSession.class.getName() + ".bookings");
+            createCache(cm, com.smartgym.manager.domain.Booking.class.getName());
+            createCache(cm, com.smartgym.manager.domain.StravaAccount.class.getName());
+            createCache(cm, com.smartgym.manager.domain.StravaAccount.class.getName() + ".activities");
+            createCache(cm, com.smartgym.manager.domain.Activity.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

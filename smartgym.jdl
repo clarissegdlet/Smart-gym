@@ -1,0 +1,54 @@
+enum BookingStatus {
+  CONFIRMED,
+  CANCELLED
+}
+
+enum ClassStatus {
+  PLANNED,
+  COMPLETED,
+  CANCELLED
+}
+
+entity Member {
+  firstName String required
+  lastName String required
+  email String required unique
+}
+
+entity ClassSession {
+  title String required
+  description String
+  dateTime Instant required
+  capacity Integer required min(1)
+  status ClassStatus required
+}
+
+entity Booking {
+  bookingDate Instant required
+  status BookingStatus required
+}
+
+entity StravaAccount {
+  stravaUserId String required
+  accessToken String required
+}
+
+entity Activity {
+  type String required
+  distance Double required min(0)
+  duration Double required min(0)
+  activityDate Instant required
+}
+
+relationship OneToMany {
+  Member{booking} to Booking{member}
+  ClassSession{booking} to Booking{classSession}
+  StravaAccount{activity} to Activity{stravaAccount}
+}
+
+relationship OneToOne {
+  Member{stravaAccount} to StravaAccount{member}
+}
+
+dto * with mapstruct
+service * with serviceClass

@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (activity(); as activityRef) {
+      <div>
+        <h2 data-cy="activityDetailsHeading"><span>Activity</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ activityRef.id }}</span>
+          </dd>
+          <dt><span>Type</span></dt>
+          <dd>
+            <span>{{ activityRef.type }}</span>
+          </dd>
+          <dt><span>Distance</span></dt>
+          <dd>
+            <span>{{ activityRef.distance }}</span>
+          </dd>
+          <dt><span>Duration</span></dt>
+          <dd>
+            <span>{{ activityRef.duration }}</span>
+          </dd>
+          <dt><span>Activity Date</span></dt>
+          <dd>
+            <span>{{ activityRef.activityDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Strava Account</span></dt>
+          <dd>
+            @if (activity()!.stravaAccount) {
+              <div>
+                <a [routerLink]="['/strava-account', activity()!.stravaAccount?.id, 'view']">{{ activityRef.stravaAccount?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/activity', activityRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

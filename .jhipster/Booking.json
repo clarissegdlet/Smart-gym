@@ -1,0 +1,39 @@
+{
+  "annotations": {
+    "changelogDate": "20260211114822"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "bookingDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "BookingStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "CONFIRMED,CANCELLED"
+    }
+  ],
+  "name": "Booking",
+  "relationships": [
+    {
+      "otherEntityName": "member",
+      "otherEntityRelationshipName": "booking",
+      "relationshipName": "member",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "classSession",
+      "otherEntityRelationshipName": "booking",
+      "relationshipName": "classSession",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

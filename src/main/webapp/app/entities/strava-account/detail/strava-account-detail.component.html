@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (stravaAccount(); as stravaAccountRef) {
+      <div>
+        <h2 data-cy="stravaAccountDetailsHeading"><span>Strava Account</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ stravaAccountRef.id }}</span>
+          </dd>
+          <dt><span>Strava User Id</span></dt>
+          <dd>
+            <span>{{ stravaAccountRef.stravaUserId }}</span>
+          </dd>
+          <dt><span>Access Token</span></dt>
+          <dd>
+            <span>{{ stravaAccountRef.accessToken }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/strava-account', stravaAccountRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

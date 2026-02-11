@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-strava-account-heading" data-cy="StravaAccountCreateUpdateHeading">Créer ou éditer un Strava Account</h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let stravaUserIdRef = editForm.get('stravaUserId')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_stravaUserId">Strava User Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="stravaUserId"
+            id="field_stravaUserId"
+            data-cy="stravaUserId"
+            formControlName="stravaUserId"
+          />
+          @if (stravaUserIdRef.invalid && (stravaUserIdRef.dirty || stravaUserIdRef.touched)) {
+            <div>
+              @if (editForm.get('stravaUserId')?.errors?.required) {
+                <small class="form-text text-danger">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let accessTokenRef = editForm.get('accessToken')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_accessToken">Access Token</label>
+          <input
+            type="text"
+            class="form-control"
+            name="accessToken"
+            id="field_accessToken"
+            data-cy="accessToken"
+            formControlName="accessToken"
+          />
+          @if (accessTokenRef.invalid && (accessTokenRef.dirty || accessTokenRef.touched)) {
+            <div>
+              @if (editForm.get('accessToken')?.errors?.required) {
+                <small class="form-text text-danger">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

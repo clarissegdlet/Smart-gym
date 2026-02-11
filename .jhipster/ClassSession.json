@@ -1,0 +1,47 @@
+{
+  "annotations": {
+    "changelogDate": "20260211114821"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateTime",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "capacity",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "1"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ClassStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PLANNED,COMPLETED,CANCELLED"
+    }
+  ],
+  "name": "ClassSession",
+  "relationships": [
+    {
+      "otherEntityName": "booking",
+      "otherEntityRelationshipName": "classSession",
+      "relationshipName": "booking",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

@@ -1,0 +1,128 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-activity-heading" data-cy="ActivityCreateUpdateHeading">Créer ou éditer un Activity</h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let typeRef = editForm.get('type')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_type">Type</label>
+          <input type="text" class="form-control" name="type" id="field_type" data-cy="type" formControlName="type" />
+          @if (typeRef.invalid && (typeRef.dirty || typeRef.touched)) {
+            <div>
+              @if (editForm.get('type')?.errors?.required) {
+                <small class="form-text text-danger">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let distanceRef = editForm.get('distance')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_distance">Distance</label>
+          <input type="number" class="form-control" name="distance" id="field_distance" data-cy="distance" formControlName="distance" />
+          @if (distanceRef.invalid && (distanceRef.dirty || distanceRef.touched)) {
+            <div>
+              @if (editForm.get('distance')?.errors?.required) {
+                <small class="form-text text-danger">Ce champ est obligatoire.</small>
+              }
+              @if (editForm.get('distance')?.errors?.min) {
+                <small class="form-text text-danger">Ce champ doit être supérieur à 0.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('distance')?.errors?.number"
+                >Ce champ doit être un nombre.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let durationRef = editForm.get('duration')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_duration">Duration</label>
+          <input type="number" class="form-control" name="duration" id="field_duration" data-cy="duration" formControlName="duration" />
+          @if (durationRef.invalid && (durationRef.dirty || durationRef.touched)) {
+            <div>
+              @if (editForm.get('duration')?.errors?.required) {
+                <small class="form-text text-danger">Ce champ est obligatoire.</small>
+              }
+              @if (editForm.get('duration')?.errors?.min) {
+                <small class="form-text text-danger">Ce champ doit être supérieur à 0.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('duration')?.errors?.number"
+                >Ce champ doit être un nombre.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let activityDateRef = editForm.get('activityDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_activityDate">Activity Date</label>
+          <div class="d-flex">
+            <input
+              id="field_activityDate"
+              data-cy="activityDate"
+              type="datetime-local"
+              class="form-control"
+              name="activityDate"
+              formControlName="activityDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (activityDateRef.invalid && (activityDateRef.dirty || activityDateRef.touched)) {
+            <div>
+              @if (editForm.get('activityDate')?.errors?.required) {
+                <small class="form-text text-danger">Ce champ est obligatoire.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('activityDate')?.errors?.datetimelocal"
+                >Ce champ doit être une date et une heure.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_stravaAccount">Strava Account</label>
+          <select
+            class="form-control"
+            id="field_stravaAccount"
+            data-cy="stravaAccount"
+            name="stravaAccount"
+            formControlName="stravaAccount"
+            [compareWith]="compareStravaAccount"
+          >
+            <option [ngValue]="null"></option>
+            @for (stravaAccountOption of stravaAccountsSharedCollection; track $index) {
+              <option [ngValue]="stravaAccountOption">{{ stravaAccountOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
