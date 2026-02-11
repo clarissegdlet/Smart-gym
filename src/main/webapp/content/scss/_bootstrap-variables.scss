@@ -8,7 +8,7 @@
 // Options:
 // Quickly modify global styling by enabling or disabling optional features.
 $enable-rounded: true;
-$enable-shadows: false;
+$enable-shadows: true;          
 $enable-gradients: false;
 $enable-transitions: true;
 $enable-hover-media-query: false;
@@ -18,19 +18,36 @@ $enable-print-styles: true;
 // Components:
 // Define common padding and border radius sizes and more.
 
-$border-radius: 0.15rem;
-$border-radius-lg: 0.125rem;
-$border-radius-sm: 0.1rem;
+$border-radius: 0.75rem;
+$border-radius-lg: 1rem;
+$border-radius-sm: 0.5rem;
+
+// Colors
+$primary: #4CAF50;        
+$secondary: #1c1c1c;
+$success: #66d17a;
+$info: #00cfe8;
+$warning: #ff9f43;
+$danger: #ea5455;
+$light: #2c2c2c;
+$dark: #111111;
 
 // Body:
 // Settings for the `<body>` element.
 
-$body-bg: #ffffff;
+$body-bg: #f4f7f6;      
+$body-color: #ffffff;
 
 // Typography:
 // Font, line-height, and color for body text, headings, and more.
 
 $font-size-base: 1rem;
+$headings-font-weight: 600;
 
 $dropdown-link-hover-color: white;
-$dropdown-link-hover-bg: #343a40;
+$dropdown-link-hover-bg: #00ff88;
+
+$card-bg: #1c1c1c;
+$card-border-color: #2c2c2c;
+
+$btn-border-radius: 50px;

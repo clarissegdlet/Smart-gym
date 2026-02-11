@@ -233,4 +233,83 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
     }
   }
 }
+
+/* ===============================
+   Custom Cards Design
+================================ */
+
+.card-custom {
+  background-color: #f8f9fa;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  color: #222; 
+}
+
+.card-custom h4 {
+  color: #222;
+}
+
+.card-custom p {
+  color: #555;
+}
+
+.card-custom:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+
+body {
+  background-color: #f4f6f9 !important;
+  color: #222 !important;
+}
+
+.btn-primary {
+  background-color: #5cb85c;
+  border: none;
+  border-radius: 50px;
+}
+
+.btn-primary:hover {
+  background-color: #4cae4c;
+}
+
+/* ===== FIX INPUT TEXT COLOR ===== */
+
+input,
+textarea,
+select,
+.form-control {
+  color: #222 !important;
+  background-color: #ffffff !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #888 !important;
+}
+
+/* Pour le formulaire de login spécifiquement */
+.login-form .form-control {
+  color: #222 !important;
+}
+
+/* Fix checkbox style */
+input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  accent-color: #4caf50;
+  cursor: pointer;
+}
+
+.form-check-input {
+  background-color: white !important;
+  border: 1px solid #ccc !important;
+}
+
+
+
+
+
 /* jhipster-needle-scss-add-main JHipster will add new css style */

@@ -1,0 +1,66 @@
+.login-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa, #e4efe9);
+}
+
+.login-card {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-card h2 {
+  font-weight: 700;
+  color: #28a745;
+}
+
+.form-control {
+  border-radius: 8px;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border: none;
+  border-radius: 8px;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.form-check-input {
+  cursor: pointer;
+}
+
+label {
+  color: #333 !important;
+  font-weight: 500;
+}
+
+h2 {
+  color: #2e7d32;
+}
+
+p,
+span {
+  color: #444;
+}
+
+.form-check-input {
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+}
+
+.form-check-label {
+  color: #333;
+  cursor: pointer;
+}
+.login-card {
+  background: #f5f7f6;
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}

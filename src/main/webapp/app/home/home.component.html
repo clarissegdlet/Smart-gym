@@ -1,59 +1,54 @@
-<div class="row">
-  <div class="col-md-3">
-    <span class="hipster img-fluid rounded"></span>
+<div class="container mt-5">
+
+  <!-- HERO -->
+  <div class="text-center mb-5">
+    <h1 class="display-4 fw-bold text-primary">SMART GYM MANAGER</h1>
+    <p class="lead">Gérez votre salle comme un pro 💪</p>
   </div>
 
-  <div class="col-md-9">
-    <h1 class="display-4"><span>Bienvenue, Java Hipster !</span> (Smart Gym Manager)</h1>
-
-    <p class="lead">Ceci est votre page d&apos;accueil</p>
-
-    <div>
-      @if (account() !== null) {
-        <div class="alert alert-success">
-          @if (account(); as accountRef) {
-            <span id="home-logged-message">Vous êtes connecté en tant que &quot;{{ accountRef.login }}&quot;.</span>
-          }
-        </div>
-      } @else {
-        <div class="alert alert-warning">
-          <span>Si vous voulez vous </span>
-          <a class="alert-link" (click)="login()">connecter</a
-          ><span
-            >, vous pouvez utiliser les comptes par défaut : <br />
-            - Administrateur (nom d&apos;utilisateur=&quot;admin&quot; et mot de passe =&quot;admin&quot;) <br />
-            - Utilisateur (nom d&apos;utilisateur=&quot;user&quot; et mot de passe =&quot;user&quot;).</span
-          >
-        </div>
-
-        <div class="alert alert-warning">
-          <span>Vous n&apos;avez pas encore de compte ?</span>&nbsp;
-          <a class="alert-link" routerLink="/account/register">Créer un compte</a>
+  <!-- ALERT LOGIN -->
+  <div class="mb-4">
+    @if (account() !== null) {
+      @if (account(); as accountRef) {
+        <div class="alert alert-success text-center shadow-sm">
+          Connecté en tant que <strong>{{ accountRef.login }}</strong>
         </div>
       }
+    } @else {
+      <div class="alert alert-light border shadow-sm text-center">
+        <span>Vous n'êtes pas connecté.</span>
+        <a class="alert-link ms-2" (click)="login()">Se connecter</a>
+      </div>
+    }
+  </div>
+
+  <!-- CARDS -->
+  <div class="row g-4">
+
+    <div class="col-md-4">
+      <div class="card-custom text-center p-4">
+        <h4 class="mb-3">👥 Membres</h4>
+        <p>Gérez vos adhérents et leurs informations.</p>
+        <a routerLink="/member" class="btn btn-primary w-100">Accéder</a>
+      </div>
     </div>
 
-    <p>Si vous avez des questions à propos de JHipster :</p>
+    <div class="col-md-4">
+      <div class="card-custom text-center p-4">
+        <h4 class="mb-3">🏋️ Sessions</h4>
+        <p>Planifiez et gérez vos cours collectifs.</p>
+        <a routerLink="/class-session" class="btn btn-primary w-100">Accéder</a>
+      </div>
+    </div>
 
-    <ul>
-      <li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer">Page d&apos;accueil de JHipster</a></li>
-      <li>
-        <a href="https://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener noreferrer">JHipster sur Stack Overflow</a>
-      </li>
-      <li>
-        <a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener noreferrer"
-          >JHipster bug tracker</a
-        >
-      </li>
-      <li>
-        <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">JHipster public chat room</a>
-      </li>
-      <li><a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer">Suivez &#64;jhipster sur Twitter</a></li>
-    </ul>
+    <div class="col-md-4">
+      <div class="card-custom text-center p-4">
+        <h4 class="mb-3">📅 Réservations</h4>
+        <p>Suivez les réservations des membres.</p>
+        <a routerLink="/booking" class="btn btn-primary w-100">Accéder</a>
+      </div>
+    </div>
 
-    <p>
-      <span>Si vous aimez JHipster, donnez nous une étoile sur</span>
-      <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">GitHub </a>!
-    </p>
   </div>
+
 </div>

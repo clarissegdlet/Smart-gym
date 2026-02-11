@@ -2,6 +2,7 @@ package com.smartgym.manager.service;
 
 import com.smartgym.manager.domain.Booking;
 import com.smartgym.manager.repository.BookingRepository;
+import com.smartgym.manager.repository.ClassSessionRepository;
 import com.smartgym.manager.service.dto.BookingDTO;
 import com.smartgym.manager.service.mapper.BookingMapper;
 import java.util.LinkedList;
@@ -23,12 +24,17 @@ public class BookingService {
     private static final Logger LOG = LoggerFactory.getLogger(BookingService.class);
 
     private final BookingRepository bookingRepository;
-
     private final BookingMapper bookingMapper;
+    private final ClassSessionRepository classSessionRepository;
 
-    public BookingService(BookingRepository bookingRepository, BookingMapper bookingMapper) {
+    public BookingService(
+        BookingRepository bookingRepository,
+        BookingMapper bookingMapper,
+        ClassSessionRepository classSessionRepository
+    ) {
         this.bookingRepository = bookingRepository;
         this.bookingMapper = bookingMapper;
+        this.classSessionRepository = classSessionRepository;
     }
 
     /**
@@ -39,16 +45,37 @@ public class BookingService {
      */
     public BookingDTO save(BookingDTO bookingDTO) {
         LOG.debug("Request to save Booking : {}", bookingDTO);
+
         Booking booking = bookingMapper.toEntity(bookingDTO);
+
+        // 🔹 1. Vérifier que la session existe
+        if (booking.getClassSession() == null || booking.getClassSession().getId() == null) {
+            throw new IllegalArgumentException("Class session must be provided");
+        }
+
+        Long classSessionId = booking.getClassSession().getId();
+
+        // 🔹 2. Récupérer la session depuis la base
+        var classSession = classSessionRepository
+            .findById(classSessionId)
+            .orElseThrow(() -> new IllegalArgumentException("Class session not found"));
+
+        // 🔹 3. Compter les réservations existantes
+        long currentBookings = bookingRepository.countByClassSession_Id(classSessionId);
+
+        // 🔹 4. Vérifier la capacité
+        if (currentBookings >= classSession.getCapacity()) {
+            throw new IllegalStateException("This class session is full");
+        }
+
+        // 🔹 5. Sauvegarde normale si OK
         booking = bookingRepository.save(booking);
+
         return bookingMapper.toDto(booking);
     }
 
     /**
      * Update a booking.
-     *
-     * @param bookingDTO the entity to save.
-     * @return the persisted entity.
      */
     public BookingDTO update(BookingDTO bookingDTO) {
         LOG.debug("Request to update Booking : {}", bookingDTO);
@@ -59,9 +86,6 @@ public class BookingService {
 
     /**
      * Partially update a booking.
-     *
-     * @param bookingDTO the entity to update partially.
-     * @return the persisted entity.
      */
     public Optional<BookingDTO> partialUpdate(BookingDTO bookingDTO) {
         LOG.debug("Request to partially update Booking : {}", bookingDTO);
@@ -70,7 +94,6 @@ public class BookingService {
             .findById(bookingDTO.getId())
             .map(existingBooking -> {
                 bookingMapper.partialUpdate(existingBooking, bookingDTO);
-
                 return existingBooking;
             })
             .map(bookingRepository::save)
@@ -79,20 +102,19 @@ public class BookingService {
 
     /**
      * Get all the bookings.
-     *
-     * @return the list of entities.
      */
     @Transactional(readOnly = true)
     public List<BookingDTO> findAll() {
         LOG.debug("Request to get all Bookings");
-        return bookingRepository.findAll().stream().map(bookingMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+        return bookingRepository
+            .findAll()
+            .stream()
+            .map(bookingMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     /**
      * Get one booking by id.
-     *
-     * @param id the id of the entity.
-     * @return the entity.
      */
     @Transactional(readOnly = true)
     public Optional<BookingDTO> findOne(Long id) {
@@ -102,8 +124,6 @@ public class BookingService {
 
     /**
      * Delete the booking by id.
-     *
-     * @param id the id of the entity.
      */
     public void delete(Long id) {
         LOG.debug("Request to delete Booking : {}", id);

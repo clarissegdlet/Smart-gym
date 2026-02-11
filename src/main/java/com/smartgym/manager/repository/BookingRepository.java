@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface BookingRepository extends JpaRepository<Booking, Long> {}
+public interface BookingRepository extends JpaRepository<Booking, Long> {
+    long countByClassSession_Id(Long classSessionId);
+}

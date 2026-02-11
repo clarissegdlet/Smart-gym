@@ -8,19 +8,28 @@ import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-login',
+  standalone: true,
   imports: [SharedModule, FormsModule, ReactiveFormsModule, RouterModule],
   templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
+
 export default class LoginComponent implements OnInit, AfterViewInit {
   username = viewChild.required<ElementRef>('username');
 
   authenticationError = signal(false);
 
   loginForm = new FormGroup({
-    username: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
-    password: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
-    rememberMe: new FormControl(false, { nonNullable: true, validators: [Validators.required] }),
-  });
+  username: new FormControl('', {
+    nonNullable: true,
+    validators: [Validators.required],
+  }),
+  password: new FormControl('', {
+    nonNullable: true,
+    validators: [Validators.required],
+  }),
+});
+
 
   private readonly accountService = inject(AccountService);
   private readonly loginService = inject(LoginService);
@@ -40,15 +49,19 @@ export default class LoginComponent implements OnInit, AfterViewInit {
   }
 
   login(): void {
-    this.loginService.login(this.loginForm.getRawValue()).subscribe({
-      next: () => {
-        this.authenticationError.set(false);
-        if (!this.router.getCurrentNavigation()) {
-          // There were no routing during login (eg from navigationToStoredUrl)
-          this.router.navigate(['']);
-        }
-      },
-      error: () => this.authenticationError.set(true),
-    });
-  }
+  const credentials = {
+    ...this.loginForm.getRawValue(),
+    rememberMe: false,
+  };
+
+  this.loginService.login(credentials).subscribe({
+    next: () => {
+      this.authenticationError.set(false);
+      if (!this.router.getCurrentNavigation()) {
+        this.router.navigate(['']);
+      }
+    },
+    error: () => this.authenticationError.set(true),
+  });
+}
 }
