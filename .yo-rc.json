@@ -1,0 +1,32 @@
+{
+  "generator-jhipster": {
+    "applicationType": "monolith",
+    "authenticationType": "jwt",
+    "baseName": "SmartGymManager",
+    "buildTool": "maven",
+    "cacheProvider": "ehcache",
+    "clientFramework": "angular",
+    "clientTestFrameworks": [],
+    "clientTheme": "none",
+    "creationTimestamp": 1770806199203,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "enableHibernateCache": true,
+    "enableTranslation": false,
+    "entities": [],
+    "feignClient": null,
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "MDkwMjlhODcxMDJhZTczOTY3YjY2ZTNmNjk5MmNjMGM2NjFmMTViMGRiMTdlYzE2YmEwYzczOThmNTU5OTRiOGM1NDlkZDM2NmMyZjIyNjdhYzdmODBhMzhiNWY4MjVlNzQzOTYzNzBmNDkwMWM2MzM0Yzc5MGU0ZTkyNDA2ODA=",
+    "microfrontend": null,
+    "microfrontends": [],
+    "nativeLanguage": "fr",
+    "packageName": "com.smartgym.manager",
+    "prodDatabaseType": "postgresql",
+    "reactive": false,
+    "serverPort": null,
+    "serviceDiscoveryType": null,
+    "syncUserWithIdp": null,
+    "testFrameworks": [],
+    "withAdminUi": true
+  }
+}
