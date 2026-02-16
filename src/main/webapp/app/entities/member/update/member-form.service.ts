@@ -21,6 +21,7 @@ type MemberFormGroupContent = {
   firstName: FormControl<IMember['firstName']>;
   lastName: FormControl<IMember['lastName']>;
   email: FormControl<IMember['email']>;
+  phoneNumber: FormControl<IMember['phoneNumber']>;
   stravaAccount: FormControl<IMember['stravaAccount']>;
 };
 
@@ -50,6 +51,7 @@ export class MemberFormService {
       email: new FormControl(memberRawValue.email, {
         validators: [Validators.required],
       }),
+      phoneNumber: new FormControl(memberRawValue.phoneNumber),
       stravaAccount: new FormControl(memberRawValue.stravaAccount),
     });
   }

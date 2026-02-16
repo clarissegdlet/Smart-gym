@@ -41,16 +41,6 @@ a:hover {
 }
 
 /* ==========================================================================
-Browser Upgrade Prompt
-========================================================================== */
-.browserupgrade {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}
-
-/* ==========================================================================
 Generic styles
 ========================================================================== */
 
@@ -65,33 +55,9 @@ Generic styles
 }
 
 /* other generic styles */
-
-.jh-card {
-  padding: 1.5%;
-  margin-top: 20px;
-  border: none;
-}
-
 .error {
   color: white;
   background-color: red;
-}
-
-.pad {
-  padding: 10px;
-}
-
-.w-40 {
-  width: 40% !important;
-}
-
-.w-60 {
-  width: 60% !important;
-}
-
-.break {
-  white-space: normal;
-  word-break: break-all;
 }
 
 .form-control {
@@ -194,37 +160,13 @@ entity detail page css
 /* ==========================================================================
 ui bootstrap tweaks
 ========================================================================== */
-.nav,
-.pagination,
-.carousel,
-.panel-title a {
-  cursor: pointer;
-}
-
-.thread-dump-modal-lock {
-  max-width: 450px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.dropdown-menu {
+.nav .dropdown-menu {
   padding-left: 0;
 }
 
 /* ==========================================================================
 angular-cli removes postcss-rtl processed inline css, processed rules must be added here instead
 ========================================================================== */
-/* page-ribbon.component.scss */
-.ribbon {
-  left: -3.5em;
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-}
-
 /* navbar.component.scss */
 .navbar {
   ul.navbar-nav {
@@ -243,7 +185,7 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
-  color: #222; 
+  color: #222;
 }
 
 .card-custom h4 {
@@ -258,7 +200,6 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
   transform: translateY(-5px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
-
 
 body {
   background-color: #f4f6f9 !important;
@@ -308,8 +249,191 @@ input[type='checkbox'] {
   border: 1px solid #ccc !important;
 }
 
+.navbar .dropdown-menu {
+  background-color: #ffffff !important;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  padding: 8px 0;
+}
 
+.navbar .dropdown-item {
+  color: #222 !important;
+  font-weight: 500;
+}
 
+.navbar .dropdown-item:hover {
+  background-color: #f4f6f9 !important;
+  color: #000 !important;
+}
 
+.navbar .dropdown-divider {
+  border-color: #e5e5e5;
+}
+
+/* ===== SMART TABLE DESIGN ===== */
+
+.table-entities {
+  background: white;
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.table-entities table {
+  margin-bottom: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table-entities thead th {
+  background: #f5f7f9;
+  color: #444;
+  font-weight: 600;
+  border-bottom: 2px solid #e3e6ea;
+  padding: 14px 12px;
+}
+
+.table-entities thead th:first-child {
+  border-top-left-radius: 10px;
+}
+
+.table-entities thead th:last-child {
+  border-top-right-radius: 10px;
+}
+
+.table-entities tbody tr {
+  transition: all 0.15s ease;
+}
+
+.table-entities tbody tr:nth-child(even) {
+  background-color: #fafbfc;
+}
+
+.table-entities tbody tr:hover {
+  background-color: #eef7ee;
+  transform: scale(1.003);
+}
+
+.table-entities td {
+  padding: 13px 12px;
+  border-top: 1px solid #edf0f2;
+}
+
+.btn-group-sm .btn {
+  border-radius: 8px !important;
+  margin: 0 2px;
+  transition: all 0.15s ease;
+}
+
+.btn-outline-info:hover {
+  background: #5bc0de;
+  color: white;
+}
+
+.btn-outline-primary:hover {
+  background: #4caf50;
+  color: white;
+}
+
+.btn-outline-danger:hover {
+  background: #e57373;
+  color: white;
+}
+
+#page-heading span {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* ===== ACTIONS COLUMN ALIGNMENT ===== */
+
+.table-entities th:last-child,
+.table-entities td:last-child {
+  text-align: center !important;
+  vertical-align: middle !important;
+  width: 140px;
+}
+
+.table-entities .btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.table-entities .btn-group .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+}
+
+/* ===== FULL PAGE LAYOUT JHIPSTER ===== */
+
+html,
+body {
+  height: 100%;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-content {
+  flex: 1;
+  display: flex;
+}
+
+.app-content .container-fluid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.jh-card {
+  flex: 1;
+}
+
+/* ===== PAGE TITLES ===== */
+
+#page-heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 25px;
+}
+
+#page-heading > div {
+  position: absolute;
+  right: 0;
+}
+
+.table-entities {
+  overflow: hidden;
+}
+
+.table-entities tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 12px;
+}
+
+.table-entities tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 12px;
+}
+
+.modal-title,
+.modal-body {
+  color: black !important;
+}
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */

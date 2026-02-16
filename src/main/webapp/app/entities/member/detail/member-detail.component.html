@@ -27,13 +27,9 @@
           <dd>
             <span>{{ memberRef.email }}</span>
           </dd>
-          <dt><span>Strava Account</span></dt>
+          <dt><span>Phone</span></dt>
           <dd>
-            @if (member()!.stravaAccount) {
-              <div>
-                <a [routerLink]="['/strava-account', member()!.stravaAccount?.id, 'view']">{{ memberRef.stravaAccount?.id }}</a>
-              </div>
-            }
+            <span>{{ memberRef.phoneNumber }}</span>
           </dd>
         </dl>
 

@@ -1,7 +1,13 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-member-heading" data-cy="MemberCreateUpdateHeading">Créer ou éditer un Member</h2>
+      <h2 id="jhi-member-heading">
+        @if (editForm.controls.id.value === null) {
+          Create member
+        } @else {
+          Update member
+        }
+      </h2>
 
       <div>
         <jhi-alert-error />
@@ -51,22 +57,17 @@
             </div>
           }
         </div>
-
+        @let phoneNumberRef = editForm.get('phoneNumber')!;
         <div class="mb-3">
-          <label class="form-label" for="field_stravaAccount">Strava Account</label>
-          <select
+          <label class="form-label" for="field_phoneNumber">Phone Number</label>
+          <input
+            type="text"
             class="form-control"
-            id="field_stravaAccount"
-            data-cy="stravaAccount"
-            name="stravaAccount"
-            formControlName="stravaAccount"
-            [compareWith]="compareStravaAccount"
-          >
-            <option [ngValue]="null"></option>
-            @for (stravaAccountOption of stravaAccountsCollection; track $index) {
-              <option [ngValue]="stravaAccountOption">{{ stravaAccountOption.id }}</option>
-            }
-          </select>
+            name="phoneNumber"
+            id="field_phoneNumber"
+            data-cy="phoneNumber"
+            formControlName="phoneNumber"
+          />
         </div>
       </div>
 
@@ -82,7 +83,7 @@
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"
         >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span>Sauvegarder</span>
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
         </button>
       </div>
     </form>

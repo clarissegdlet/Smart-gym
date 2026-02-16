@@ -38,6 +38,9 @@ public class Member implements Serializable {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
     @JsonIgnoreProperties(value = { "activities", "member" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
@@ -100,6 +103,14 @@ public class Member implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public StravaAccount getStravaAccount() {

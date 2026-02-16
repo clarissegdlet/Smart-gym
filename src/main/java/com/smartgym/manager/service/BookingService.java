@@ -27,11 +27,7 @@ public class BookingService {
     private final BookingMapper bookingMapper;
     private final ClassSessionRepository classSessionRepository;
 
-    public BookingService(
-        BookingRepository bookingRepository,
-        BookingMapper bookingMapper,
-        ClassSessionRepository classSessionRepository
-    ) {
+    public BookingService(BookingRepository bookingRepository, BookingMapper bookingMapper, ClassSessionRepository classSessionRepository) {
         this.bookingRepository = bookingRepository;
         this.bookingMapper = bookingMapper;
         this.classSessionRepository = classSessionRepository;
@@ -106,11 +102,7 @@ public class BookingService {
     @Transactional(readOnly = true)
     public List<BookingDTO> findAll() {
         LOG.debug("Request to get all Bookings");
-        return bookingRepository
-            .findAll()
-            .stream()
-            .map(bookingMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+        return bookingRepository.findAll().stream().map(bookingMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
     }
 
     /**
@@ -128,5 +120,22 @@ public class BookingService {
     public void delete(Long id) {
         LOG.debug("Request to delete Booking : {}", id);
         bookingRepository.deleteById(id);
+    }
+
+    /**
+     * Get booking history of a member.
+     */
+    @Transactional(readOnly = true)
+    public List<BookingDTO> findHistoryByMember(Long memberId) {
+        LOG.debug("Request to get booking history for member : {}", memberId);
+
+        return bookingRepository.findByMember_IdOrderByBookingDateDesc(memberId).stream().map(bookingMapper::toDto).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<BookingDTO> getBookingsForMember(Long memberId) {
+        LOG.debug("Request to get bookings for member {}", memberId);
+
+        return bookingRepository.findByMember_IdOrderByBookingDateDesc(memberId).stream().map(bookingMapper::toDto).toList();
     }
 }

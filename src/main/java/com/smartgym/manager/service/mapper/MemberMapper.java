@@ -11,8 +11,15 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring")
 public interface MemberMapper extends EntityMapper<MemberDTO, Member> {
+    // ENTITY -> DTO
     @Mapping(target = "stravaAccount", source = "stravaAccount", qualifiedByName = "stravaAccountId")
+    @Mapping(target = "phoneNumber", source = "phoneNumber")
     MemberDTO toDto(Member s);
+
+    // DTO -> ENTITY  🔥 OBLIGATOIRE
+    @Mapping(target = "stravaAccount", source = "stravaAccount")
+    @Mapping(target = "phoneNumber", source = "phoneNumber")
+    Member toEntity(MemberDTO memberDTO);
 
     @Named("stravaAccountId")
     @BeanMapping(ignoreByDefault = true)

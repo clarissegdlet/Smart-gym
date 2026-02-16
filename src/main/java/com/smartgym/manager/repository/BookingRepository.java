@@ -1,6 +1,7 @@
 package com.smartgym.manager.repository;
 
 import com.smartgym.manager.domain.Booking;
+import java.util.List;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -11,4 +12,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
     long countByClassSession_Id(Long classSessionId);
+    List<Booking> findByMember_IdOrderByBookingDateDesc(Long memberId);
 }

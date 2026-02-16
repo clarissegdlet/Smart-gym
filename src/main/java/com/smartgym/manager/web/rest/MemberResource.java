@@ -1,7 +1,9 @@
 package com.smartgym.manager.web.rest;
 
 import com.smartgym.manager.repository.MemberRepository;
+import com.smartgym.manager.service.BookingService;
 import com.smartgym.manager.service.MemberService;
+import com.smartgym.manager.service.dto.BookingDTO;
 import com.smartgym.manager.service.dto.MemberDTO;
 import com.smartgym.manager.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
@@ -36,10 +38,12 @@ public class MemberResource {
     private final MemberService memberService;
 
     private final MemberRepository memberRepository;
+    private final BookingService bookingService;
 
-    public MemberResource(MemberService memberService, MemberRepository memberRepository) {
+    public MemberResource(MemberService memberService, MemberRepository memberRepository, BookingService bookingService) {
         this.memberService = memberService;
         this.memberRepository = memberRepository;
+        this.bookingService = bookingService;
     }
 
     /**
@@ -167,5 +171,10 @@ public class MemberResource {
         return ResponseEntity.noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/members/{id}/bookings")
+    public List<BookingDTO> getMemberHistory(@PathVariable Long id) {
+        return bookingService.findHistoryByMember(id);
     }
 }

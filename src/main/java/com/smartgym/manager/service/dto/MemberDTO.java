@@ -21,6 +21,8 @@ public class MemberDTO implements Serializable {
     @NotNull
     private String email;
 
+    private String phoneNumber;
+
     private StravaAccountDTO stravaAccount;
 
     public Long getId() {
@@ -53,6 +55,14 @@ public class MemberDTO implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public StravaAccountDTO getStravaAccount() {
